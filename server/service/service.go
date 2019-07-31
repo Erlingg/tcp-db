@@ -24,21 +24,35 @@ func NewDBService(s domain.DBStore) *dbService {
 //
 //}
 
-
-func (s dbService) POP(k string) string {
-	return s.store.GetRow(k) + "\n"
-}
-func (s dbService) PUT(k string, v string) {
-	s.store.AddRow(k, v)
-}
-func (s dbService) DEL(k string) {
-	s.store.DelRow(k)
-}
-func (s dbService) LIST() string {
-	list := s.store.GetList()
-	var res string
-	for _, v := range list{
-		res += v + "\n"
+func (s dbService) GET(k string) string {
+	res, err := s.store.GetRow(k)
+	if err != nil {
+		return err.Error()
 	}
 	return res
+}
+func (s dbService) SET(k string, v string) string {
+	err := s.store.SetRow(k, v)
+	if err != nil {
+		return err.Error()
+	}
+	return "SET succeeded"
+}
+func (s dbService) DEL(k string) string {
+	err := s.store.DelRow(k)
+	if err != nil {
+		return err.Error()
+	}
+	return "DEL succeeded"
+}
+func (s dbService) KEYS() string {
+	list := s.store.GetKeys()
+	if len(list) == 0 {
+		return "Empty storage"
+	}
+	var res string
+	for _, v := range list {
+		res += v + ","
+	}
+	return res[:len(res)-1]
 }

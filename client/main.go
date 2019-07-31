@@ -15,7 +15,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	_, _ = conn.Write([]byte("POP A 1\n"))
+	//_, _ = conn.Write([]byte("SET A 111\n"))
+	//_, _ = conn.Write([]byte("SET B 222\n"))
+	//_, _ = conn.Write([]byte("GET A\n"))
+	//_, _ = conn.Write([]byte("GET B\n"))
+	//_, _ = conn.Write([]byte("KEYS\n"))
+	//_, _ = conn.Write([]byte("DEL A\n"))
+
 	//_, _ = conn.Write([]byte("привет1\n"))
 	//_, _ = conn.Write([]byte("привет2\n"))
 	//_, _ = conn.Write([]byte("привет3\n"))

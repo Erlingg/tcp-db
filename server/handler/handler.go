@@ -17,14 +17,14 @@ func (h dbHandlers) Query(query string) string {
 	split := strings.Split(query, " ")
 	var res string
 	switch split[0] {
-		case "POP":
-			res = h.srv.POP(split[1])
-		case "PUT":
-			h.srv.PUT(split[1], split[2])
-		case "DEL":
-			h.srv.DEL(split[1])
-		case "LIST":
-			res = h.srv.LIST()
+	case "GET":
+		res = h.srv.GET(split[1])
+	case "SET":
+		res = h.srv.SET(split[1], split[2])
+	case "DEL":
+		res = h.srv.DEL(split[1])
+	case "KEYS":
+		res = h.srv.KEYS()
 	}
 	//list := h.srv.GetServiceList()
 	//
@@ -35,8 +35,9 @@ func (h dbHandlers) Query(query string) string {
 	//}
 	//
 	//_, _ = w.Write(b)
-	return res
+	return res + "\n"
 }
+
 //
 //func (h dbHandlers) Add(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 //	u := domain.User{}

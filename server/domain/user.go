@@ -5,17 +5,17 @@ package domain
 //}
 
 type DBStore interface {
-	GetRow(k string) string
-	AddRow(k string, v string)
-	DelRow(k string)
-	GetList() map[string]string
+	GetRow(k string) (string, error)
+	SetRow(k string, v string) error
+	DelRow(k string) error
+	GetKeys() []string
 }
 
 type DBService interface {
-	POP(k string) string
-	PUT(k string, v string)
-	DEL(k string)
-	LIST() string
+	GET(k string) string
+	SET(k string, v string) string
+	DEL(k string) string
+	KEYS() string
 }
 type DBHandler interface {
 	Query(s string) string

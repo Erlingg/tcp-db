@@ -2,10 +2,12 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"io"
 	"log"
 	"net"
+	"strconv"
 	"tcp-db/server/domain"
 	"tcp-db/server/handler"
 	"tcp-db/server/service"
@@ -16,7 +18,9 @@ func main() {
 	dbStore := store.NewDBStore()
 	dbService := service.NewDBService(dbStore)
 	dbHandler := handler.NewDBHandlers(dbService)
-	tcp, err := net.Listen("tcp", ":8080")
+	port := flag.Int("port", 8080, "set server port")
+	fmt.Println(strconv.Itoa(*port))
+	tcp, err := net.Listen("tcp", ":"+strconv.Itoa(*port))
 	if err != nil {
 		log.Fatal(err)
 	}
