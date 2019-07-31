@@ -19,6 +19,7 @@ func main() {
 	dbService := service.NewDBService(dbStore)
 	dbHandler := handler.NewDBHandlers(dbService)
 	port := flag.Int("port", 8080, "set server port")
+	flag.Parse()
 	fmt.Println(strconv.Itoa(*port))
 	tcp, err := net.Listen("tcp", ":"+strconv.Itoa(*port))
 	if err != nil {
